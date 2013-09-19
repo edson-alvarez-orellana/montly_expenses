@@ -36,7 +36,6 @@ public class MainActivity extends Activity {
 	private EditText editTextPrice;
 
 	private Schedule schedule;
-	private String expensesSummary;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +62,11 @@ public class MainActivity extends Activity {
 		buttonExit = (Button) findViewById(R.id.buttonExit);
 		buttonExit.setOnClickListener(exitButtonListener);
 
-		expensesSummary = "";
 		schedule = new Schedule();
 		
 		DatabaseHelper.dropTable(this);
 		DatabaseHelper.createTable(this);
-		DatabaseHelper.insertIntoTable(this);
+		//DatabaseHelper.fillDatabase(this);
 	}
 
 	private OnClickListener exitButtonListener = new OnClickListener() {
@@ -144,7 +142,7 @@ public class MainActivity extends Activity {
 	public AlertDialog getExpensesDetailsDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setMessage(expensesSummary)
+		builder.setMessage(DatabaseHelper.showTableValues(this))
 		.setTitle("Expenses");
 
 		// Add the buttons
@@ -165,26 +163,15 @@ public class MainActivity extends Activity {
 
 	public void addExpense() {
 		if(editTextExpense != null && editTextPrice != null) {
-			schedule.getCurrentMonth().addExpense(new Expense(
-					editTextExpense.getText().toString(),
-					Float.parseFloat(editTextPrice.getText().toString()),
-					new Date()));
+			
+			Expense expense = new Expense();
+			expense.setName(editTextExpense.getText().toString());
+			expense.setPrice(Float.parseFloat(editTextPrice.getText().toString()));
+			expense.setDate(new Date());
+			schedule.getCurrentMonth().addExpense(expense);
+			DatabaseHelper.insertIntoTable(this, expense);
 		} else {
 			Log.d(TAG, "Expense name and Price NULL...");
 		}
-
-		updateExpensesDetail();
-	}
-
-	private void updateExpensesDetail() {
-		expensesSummary = "";
-		List<Expense> expenses = schedule.getCurrentMonth().getExpenses();
-		float total = 0;
-		for (int i = 0; i < expenses.size(); i++) {
-			expensesSummary += expenses.get(i).getName() + " - " + expenses.get(i).getPrice() + "\n";
-			total += expenses.get(i).getPrice();
-		}			
-
-		expensesSummary += "-------------------------------\nTotal: " + total;
 	}
 }
