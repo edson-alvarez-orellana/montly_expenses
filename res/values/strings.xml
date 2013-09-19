@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App strings -->
+    <string name="app_name">MonthlyExpenses</string>
+    <string name="menu_settings">Configuration</string>
+    <string name="title_activity_main">Monthly Expenses</string>
+
+    <!-- Common strings -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+
+    <!-- Main buttons strings -->
+    <string name="view_expenses">View expenses</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="view_services">View services</string>
+    <string name="add_service">Add Service</string>
+    <string name="exit">Exit</string>
+
+    <!-- Outlay strings -->
+    <string name="price">Price:</string>
+    <string name="submit">Submit</string>
+
+    <!-- Expense strings -->
+    <string name="expense_name">Expense Name:</string>
+    <string name="date">Date:</string>
+
+    <!-- Service strings -->
+    <string name="service_name">Service Name:</string>
+    <string name="company_name">Company Name:</string>
+    <string name="set_reminder">Set Reminder:</string>
+    <string name="due_date">Due Date:</string>
+
+    <!-- Exit dialog strings -->
+    <string name="exit_title">Are you sure you want to exit?</string>
+    <string name="exit_message">Click Yes to exit, otherwise click No.</string>
+
+</resources>
